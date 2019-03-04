@@ -1,18 +1,17 @@
-# Barebones React/TypeScript/Express/Sass Boilerplate
-This project is a starting point for a TypeScript based React app that also has a local API server using express.
+# Chirp It Up, Full Stack Style!
+The purpose of this lab is to take your chirpr schema, connect it to your Chirper Half Stack app, and utilize the database instead of chirpsstore.ts or chirps.json!
 
-There are 2 different Webpack configurations. One for the server and one for the client.
-
-## Server
-The server build process compiles the TypeScript files found in `/src/server` into a single bundled JavaScript file located in the `/dist` directory.
-
-## Client
-The client build process compiles the React app located in `/src/client` into a bundled located at `/public/js/app.js`.
-
-The client configuration will also build the Sass files found at `/src/client/scss`. The App component imports the `app.scss` file which already includes an import for Bootstrap.
-
-## Running the project
-In order to run the server, use `npm run dev`, and the server will start on port 3000 (http://localhost:3000). 
-
-Webpack will watch the files. Once you save a file, you can refresh your browser to ensure you got the updated client files. If you only change server files, you *shouldn't* need to refresh.
+# Required Steps
+ ## Database
+* Create a database user named chirprapp
+* Grant all privileges to your chirpr database.
+Hint: use chirpr.* in the ON part of the GRANT statement.
+ ## Node
+* In your chirpr API, use your database to store chirps instead of a file
+* Install and save the mysql @types/mysql NodeJS package using NPM
+* Configure your connection using createConnection
+* In each API method, make the appropriate database call to create, read, update, and delete chirps
+* Test all the REST API endpoints in Postman to confirm they all work
+## React
+ * Adjust your frontend React components to use the same API endpoints from above to achieve the same functionality it had reading a json file. It should display all chirps, view one chirp, delete or edit that, and the ability to add new chirps.
 # TypeScriptChirperFS
