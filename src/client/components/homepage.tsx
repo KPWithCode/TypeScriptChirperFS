@@ -22,7 +22,7 @@ class List extends React.Component<IListProps, IListState> {
 
     async componentDidMount() {
         try {
-            let r = await fetch('/');
+            let r = await fetch('/api/chirps');
             let data = await r.json();
             let chirps = Object.keys(data).map(key => {
                 return {
@@ -93,7 +93,7 @@ class List extends React.Component<IListProps, IListState> {
                         </input>
                         <button className="btn btn-dark mt-2 ">BATON !</button>
                     </form>
-                    <div className="d-flex justify-content-center">
+                    <div className="d-flex justify-content-center ">
                         <div className=" container col-12 d-flex justify-content-center bg-primary">
                             {this.state.chirps.map(chirp => {
                                 return (<ChirpCard key={chirp.id} chirp={chirp} />);
