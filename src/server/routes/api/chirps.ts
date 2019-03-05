@@ -31,29 +31,29 @@ router.get('/:id', async (req, res) => {
 
 
 // THis post request creates chirp
-// router.post('/', async (req, res, next) => {
-//     let chirpsdb = req.body;
-//     let id = req.params.id;
-//     try {
-//         res.json(await db.chirpsdb.post(id, chirpsdb.chirpsdb, chirpsdb.name))
-//     } catch (e) {
-//         console.log(e)
-//         res.sendStatus(500)
-//     }
+router.post('/', async (req, res, next) => {
+    let chirpsdb = req.body;
+    let id = req.params.id;
+    try {
+        res.json(await db.chirpsdb.post(id, chirpsdb.chirpsdb, chirpsdb.name))
+    } catch (e) {
+        console.log(e)
+        res.sendStatus(500)
+    }
 
-// })
+})
 
 // Request to update a chirp id
 router.put('/:id', async (req, res) => {
     let id = req.params.id;
     let chirpsdb = req.body;
-
     try {
-        res.json(await db.chirpsdb.update(chirpsdb.chirpsdb, chirpsdb.name, id))
+        return res.json(await db.chirpsdb.put(chirpsdb.chirpsdb, id))
     } catch (e) {
         console.log(e)
         res.sendStatus(500)
     }
+
 })
 
 // Request to delete the chirp id
