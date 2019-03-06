@@ -10,8 +10,8 @@ const oneChirp = async (userid: number) =>
     'SELECT * FROM Chirps WHERE id = ?', [userid]
   );
 
-const post = async (id: number, chirptext: string, userid: string) =>
-  Query(`INSERT INTO Chirps (id, chirptext,userid) VALUES ${id}, ${chirptext},${userid}`);
+const post = async (id: number, userid:string, chirptext: string) =>
+  Query(`INSERT INTO Chirps (id,userid, chirptext) VALUES (${id},${userid},'${chirptext}')`);
 
 
 const remove = async (id: number) => {
@@ -19,7 +19,7 @@ const remove = async (id: number) => {
 };
 
 const put = async (chirptext: string, id: number) => {
-  Query(`UPDATE Chirps SET chirptext = ${chirptext} WHERE id = ${id} `)
+  Query(`UPDATE Chirps SET chirptext = '${chirptext}' WHERE id = ${id} `)
 };
 
 export default {
