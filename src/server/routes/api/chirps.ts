@@ -61,7 +61,6 @@ router.put('/:id', async (req, res) => {
 // Request to delete the chirp id
 router.delete('/:id', async (req, res) => {
     let id = req.params.id
-
     try {
         res.json(await db.chirpsdb.remove(id))
     } catch (e) {
