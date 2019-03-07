@@ -66,13 +66,11 @@ class List extends React.Component<IListProps, IListState> {
 
     render() {
         return (
-
-            <div className="row bg-secondary p-2">
+            <div className="bg-secondary p-2 ">
                 <h1>Chirps Me Baby</h1>
                 <div>
                     <h1>One More Time</h1>
                 </div>
-
 
                 <div className="col-md-12">
                     <form className="form-group"
@@ -93,18 +91,14 @@ class List extends React.Component<IListProps, IListState> {
                         </input>
                         <button className="btn btn-dark mt-2 ">BATON !</button>
                     </form>
-                    <div className="d-flex justify-content-center ">
-                        <div className=" container col-12 d-flex justify-content-center bg-primary">
-                            {this.state.chirps.map(chirp => {
-                                return (<ChirpCard key={chirp.id} chirp={chirp} />);
+                    <div className="col-md-12 m-2 p-5 bg-light ">
+                        {this.state.chirps.map(chirp => {
+                            return (<ChirpCard key={chirp.id} chirp={chirp} />);
 
-                            })}
-                        </div>
+                        })}
                     </div>
                 </div>
-
             </div>
-
         )
     }
 }
