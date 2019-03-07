@@ -1,6 +1,7 @@
 import * as React from 'react';
 import ChirpCard from './chirpcard'
 import { string } from 'prop-types';
+import chirpsdb from '../../server/db/chirpsdb';
 
 export interface IListProps {
 
@@ -21,24 +22,23 @@ class List extends React.Component<IListProps, IListState> {
 
 
     async componentDidMount() {
-        try {
-            let r = await fetch('/api/chirps');
-            let data = await r.json();
-            let chirps = Object.keys(data).map(key => {
-                return {
-                    id: key,
-                    userid: data[key].userid,
-                    chirptext: data[key].chirptext
-                }
 
+        // let r = await fetch('/api/chirps');
+        // let data = await r.json();
+        // let chirps = Object.keys(data).map(key => {
+        //     return {
+        //         id: key,
+        //         userid: data[key].userid,
+        //         chirptext: data[key].chirptext
+        //     }
+        // })
+        fetch('/api/chirps')
+            .then(response => response.json())
+            .then(chirps => {
+                chirps.reverse()
+                this.setState({ chirps })
             })
-            chirps.pop()
-            chirps.reverse()
-            this.setState({ chirps })
-        } catch (e) {
-            console.log(e)
-        }
-    }
+}
 
     async handleSubmit(e: React.ChangeEvent<HTMLFormElement>) {
         if (this.state.chirptext && this.state.userid) {
@@ -94,7 +94,6 @@ class List extends React.Component<IListProps, IListState> {
                     <div className="col-md-12 m-2 p-5 bg-light ">
                         {this.state.chirps.map(chirp => {
                             return (<ChirpCard key={chirp.id} chirp={chirp} />);
-
                         })}
                     </div>
                 </div>
@@ -102,10 +101,6 @@ class List extends React.Component<IListProps, IListState> {
         )
     }
 }
-
-
-
-
 
 
 

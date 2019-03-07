@@ -39,11 +39,11 @@ class Edit extends React.Component<IEditProps, IEditState> {
 
     async handleDelete() {
         let id = this.props.match.params.id;
-    
+
         try {
             let r = await fetch(`/api/chirps/${id}`, {
                 method: "DELETE"
-        
+
             });
             this.props.history.push("/")
         } catch (e) {
@@ -106,8 +106,6 @@ class Edit extends React.Component<IEditProps, IEditState> {
             </div>
         )
     }
-
-
 
 }
 
