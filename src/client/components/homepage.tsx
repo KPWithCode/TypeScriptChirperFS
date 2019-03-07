@@ -6,15 +6,15 @@ export interface IListProps {
 
 }
 export interface IListState {
-    chirps: { id: string; user: string; chirptext: string; }[]
-    user: string;
+    chirps: { id: string; userid: string; chirptext: string; }[]
+    userid: string;
     chirptext: string;
 }
 
 class List extends React.Component<IListProps, IListState> {
     constructor(props: IListProps) {
         super(props);
-        this.state = { chirps: [], user: undefined, chirptext: undefined }
+        this.state = { chirps: [], userid: undefined, chirptext: undefined }
 
         this.handleSubmit = this.handleSubmit.bind(this)
     }
@@ -27,7 +27,7 @@ class List extends React.Component<IListProps, IListState> {
             let chirps = Object.keys(data).map(key => {
                 return {
                     id: key,
-                    user: data[key].user,
+                    userid: data[key].userid,
                     chirptext: data[key].chirptext
                 }
 
@@ -41,9 +41,9 @@ class List extends React.Component<IListProps, IListState> {
     }
 
     async handleSubmit(e: React.ChangeEvent<HTMLFormElement>) {
-        if (this.state.chirptext && this.state.user) {
+        if (this.state.chirptext && this.state.userid) {
             let data = {
-                user: this.state.user,
+                userid: this.state.userid,
                 chirptext: this.state.chirptext
             };
 
@@ -77,9 +77,9 @@ class List extends React.Component<IListProps, IListState> {
                         onSubmit={this.handleSubmit} >
                         <label>Username</label>
                         <input type="text" placeholder="Username" className="form-control"
-                            value={this.state.user}
+                            value={this.state.userid}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                                this.setState({ user: e.target.value })
+                                this.setState({ userid: e.target.value })
                             }>
                         </input>
                         <label>Chirp</label>
