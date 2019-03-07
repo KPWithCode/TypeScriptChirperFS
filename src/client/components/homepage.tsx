@@ -6,15 +6,15 @@ export interface IListProps {
 
 }
 export interface IListState {
-    chirps: { id: string; user: string; post: string; }[]
+    chirps: { id: string; user: string; chirptext: string; }[]
     user: string;
-    post: string;
+    chirptext: string;
 }
 
 class List extends React.Component<IListProps, IListState> {
     constructor(props: IListProps) {
         super(props);
-        this.state = { chirps: [], user: undefined, post: undefined }
+        this.state = { chirps: [], user: undefined, chirptext: undefined }
 
         this.handleSubmit = this.handleSubmit.bind(this)
     }
@@ -28,7 +28,7 @@ class List extends React.Component<IListProps, IListState> {
                 return {
                     id: key,
                     user: data[key].user,
-                    post: data[key].post
+                    chirptext: data[key].chirptext
                 }
 
             })
@@ -41,10 +41,10 @@ class List extends React.Component<IListProps, IListState> {
     }
 
     async handleSubmit(e: React.ChangeEvent<HTMLFormElement>) {
-        if (this.state.post && this.state.user) {
+        if (this.state.chirptext && this.state.user) {
             let data = {
                 user: this.state.user,
-                post: this.state.post
+                chirptext: this.state.chirptext
             };
 
             e.preventDefault();
@@ -84,9 +84,9 @@ class List extends React.Component<IListProps, IListState> {
                         </input>
                         <label>Chirp</label>
                         <input type="text" placeholder="Chirp" className="form-control"
-                            value={this.state.post}
+                            value={this.state.chirptext}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                                this.setState({ post: e.target.value })
+                                this.setState({ chirptext: e.target.value })
                             }>
                         </input>
                         <button className="btn btn-dark mt-2 ">BATON !</button>
