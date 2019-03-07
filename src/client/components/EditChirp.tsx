@@ -8,7 +8,7 @@ export interface IEditProps extends RouteComponentProps<{ id: string }> {
 }
 
 export interface IEditState {
-    chirp: { user: string; post: string; }
+    chirp: { userid: string; chirptext: string; }
 
 }
 
@@ -18,8 +18,8 @@ class Edit extends React.Component<IEditProps, IEditState> {
         super(props)
         this.state = {
             chirp: {
-                user: null,
-                post: null
+                userid: null,
+                chirptext: null
 
             }
         }
@@ -39,9 +39,11 @@ class Edit extends React.Component<IEditProps, IEditState> {
 
     async handleDelete() {
         let id = this.props.match.params.id;
+    
         try {
             let r = await fetch(`/api/chirps/${id}`, {
                 method: "DELETE"
+        
             });
             this.props.history.push("/")
         } catch (e) {
@@ -52,8 +54,8 @@ class Edit extends React.Component<IEditProps, IEditState> {
     async handleEdit() {
         let id = this.props.match.params.id;
         let data = {
-            user: this.state.chirp.user,
-            post: this.state.chirp.post
+            userid: this.state.chirp.userid,
+            chirptext: this.state.chirp.chirptext
         }
         try {
             await fetch(`/api/chirps/${id}`, {
@@ -71,20 +73,20 @@ class Edit extends React.Component<IEditProps, IEditState> {
 
     //onchange
     handleChange(value: string) {
-        this.state.chirp.post = value
+        this.state.chirp.chirptext = value
     }
     render() {
-        let { user, post } = this.state.chirp
+        let { userid, chirptext } = this.state.chirp
         return (
             <div className="row">
                 <div className="col-md-8">
-                    <div className="card-body bg-secondary"> User
-                        <h3 className="card-title">{user}</h3>
+                    <div className="card-body bg-secondary">
+                        <h3 className="card-title">{userid}</h3>
                         <input type="text"
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                 this.handleChange(e.target.value)
                             }}
-                            placeholder={post}
+                            placeholder={chirptext}
                         />
                     </div>
                     <div className="d-flex justify-content-center bg-secondary">
