@@ -12,6 +12,7 @@ class App extends React.Component<IAppProps, IAppState> {
                     <div className="container">
                         <Switch>
                             <Route exact path="/" component={List} />
+                            {/* Check to see if route path has to change for edit */}
                             <Route exact path="/editing/:id" component={Edit} />
                         </Switch>
                     </div>

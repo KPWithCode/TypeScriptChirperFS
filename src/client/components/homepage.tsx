@@ -1,6 +1,7 @@
 import * as React from 'react';
 import ChirpCard from './chirpcard'
 import { string } from 'prop-types';
+
 import chirpsdb from '../../server/db/chirpsdb';
 
 export interface IListProps {
@@ -22,26 +23,17 @@ class List extends React.Component<IListProps, IListState> {
 
 
     async componentDidMount() {
-
-        // let r = await fetch('/api/chirps');
-        // let data = await r.json();
-        // let chirps = Object.keys(data).map(key => {
-        //     return {
-        //         id: key,
-        //         userid: data[key].userid,
-        //         chirptext: data[key].chirptext
-        //     }
-        // })
         fetch('/api/chirps')
             .then(response => response.json())
             .then(chirps => {
-                chirps.reverse()
                 this.setState({ chirps })
             })
-}
+
+    }
 
     async handleSubmit(e: React.ChangeEvent<HTMLFormElement>) {
         if (this.state.chirptext && this.state.userid) {
+
             let data = {
                 userid: this.state.userid,
                 chirptext: this.state.chirptext
@@ -49,7 +41,7 @@ class List extends React.Component<IListProps, IListState> {
 
             e.preventDefault();
             try {
-                await fetch("/api/chirps", {
+                await fetch(`/api/chirps`, {
                     method: "POST",
                     headers: {
                         "Content-type": "application/json"

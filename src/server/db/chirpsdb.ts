@@ -1,7 +1,7 @@
 import { Query } from './index';
 
 const all = async () => Query(
-  'SELECT * FROM Chirps'
+  'SELECT * FROM Chirps ORDER BY _created DESC'
 )
 
 
@@ -10,8 +10,8 @@ const oneChirp = async (userid: number) =>
     'SELECT * FROM Chirps WHERE id = ?', [userid]
   );
 
-const post = async (id: number, userid: string, chirptext: string) =>
-  Query(`INSERT INTO Chirps (id,userid, chirptext) VALUES (${id},${userid},'${chirptext}')`);
+const post = async ( chirptext: string, userid: string, ) =>
+  Query(`INSERT INTO Chirps ( userid, chirptext) VALUES (${userid}, '${chirptext}')`);
 
 
 const remove = async (id: number) => {

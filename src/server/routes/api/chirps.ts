@@ -31,13 +31,12 @@ router.get('/:id', async (req, res) => {
 
 
 // THis post request creates chirp
-router.post('/:id', async (req, res, next) => {
-    let id = req.params.id;
-    let userid = req.body.userid
-    let chirptext = req.body.chirptext;
- 
+router.post('/', async (req, res, next) => {
+
+    let chirptext = req.body;
+
     try {
-        res.json(await db.chirpsdb.post(id,userid,chirptext))
+        res.json(await db.chirpsdb.post(chirptext.chirptext,chirptext.userid))
     } catch (e) {
         console.log(e)
         res.sendStatus(500)
@@ -61,6 +60,7 @@ router.put('/:id', async (req, res) => {
 // Request to delete the chirp id
 router.delete('/:id', async (req, res) => {
     let id = req.params.id
+
     try {
         res.json(await db.chirpsdb.remove(id))
     } catch (e) {
